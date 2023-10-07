@@ -1,22 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from "react";
+import "./App.css"; // assuming you have default App.css from create-react-app
+import TaskInput from "./components/TaskInput";
+import TaskList from "./components/TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (text) => {
+    const newTask = { text, done: false };
+    setTasks([...tasks, newTask]);
+  };
+
+  const toggleTaskDone = (index) => {
+    const newTasks = [...tasks];
+    newTasks[index].done = !newTasks[index].done;
+    setTasks(newTasks);
+  };
+
+  const removeTask = (index) => {
+    const newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Personal Task Manager</h1>
+        <TaskInput onAddTask={addTask} />
+        <TaskList
+          tasks={tasks}
+          onToggleDone={toggleTaskDone}
+          onRemoveTask={removeTask}
+        />
       </header>
     </div>
   );
