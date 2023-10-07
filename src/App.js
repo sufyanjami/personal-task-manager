@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Personal Task Manager</h1>
+        <h1>Personal Task Manager by Sufyan.</h1>
         <TaskInput onAddTask={addTask} />
         <TaskList
           tasks={tasks}
